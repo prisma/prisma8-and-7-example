@@ -1,0 +1,19 @@
+packages:
+  - "."
+
+allowBuilds:
+  "@prisma/engines": true
+  esbuild: true
+  prisma: true
+
+minimumReleaseAgeExclude:
+  - '@prisma/adapter-pg@7.10.0-dev.58'
+  - '@prisma/client-runtime-utils@7.10.0-dev.58'
+  - '@prisma/client@7.10.0-dev.58'
+  - '@prisma/debug@7.10.0-dev.58'
+  - '@prisma/driver-adapter-utils@7.10.0-dev.58'
+  - '@prisma/config@7.10.0-dev.58'
+  - '@prisma/engines@7.10.0-dev.58'
+  - '@prisma/fetch-engine@7.10.0-dev.58'
+  - '@prisma/get-platform@7.10.0-dev.58'
+  - prisma@7.10.0-dev.58

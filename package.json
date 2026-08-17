@@ -1,0 +1,41 @@
+{
+  "name": "prisma7and8",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small Users and Posts REST API built with Hono, Prisma 7, and PostgreSQL",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/src/server.js",
+    "prisma:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy"
+  },
+  "keywords": [
+    "hono",
+    "prisma",
+    "postgresql"
+  ],
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "dependencies": {
+    "@hono/node-server": "^2.1.1",
+    "@prisma/adapter-pg": "7.10.0-dev.58",
+    "@prisma/client": "7.10.0-dev.58",
+    "dotenv": "^17.4.2",
+    "hono": "^4.13.2",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/pg": "^8.21.0",
+    "prisma": "7.10.0-dev.58",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}
