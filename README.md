@@ -45,3 +45,14 @@ The Hono application exposes:
 Successful endpoint responses use HTTP 200. User responses include their posts, and post responses include their author.
 
 This is the baseline from which Prisma 8 and the side-by-side configuration will be introduced.
+
+## Step 1: Namespace the Prisma 7 CLI
+
+The direct `prisma` development dependency is now `@prisma/prisma7` at `7.10.0-dev.58`. This package exposes the `prisma7` binary and keeps `prisma` at the same version as a transitive dependency. Giving Prisma 7 its own direct package, project-level binary, and config filename leaves the conventional project-level Prisma names available for adding Prisma 8 side by side later without ambiguity.
+
+Concretely, this step:
+
+- replaces the direct `prisma` dependency with `@prisma/prisma7`
+- changes the generate and migration scripts to call `prisma7`
+- renames `prisma.config.ts` to `prisma7.config.ts`
+- changes the config import to `@prisma/prisma7/config`

@@ -3,6 +3,7 @@ packages:
 
 allowBuilds:
   "@prisma/engines": true
+  "@prisma/prisma7": true
   esbuild: true
   prisma: true
 
@@ -16,4 +17,5 @@ minimumReleaseAgeExclude:
   - '@prisma/engines@7.10.0-dev.58'
   - '@prisma/fetch-engine@7.10.0-dev.58'
   - '@prisma/get-platform@7.10.0-dev.58'
+  - '@prisma/prisma7@7.10.0-dev.58'
   - prisma@7.10.0-dev.58

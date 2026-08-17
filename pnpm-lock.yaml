@@ -215,7 +215,7 @@ importers:
         version: 7.10.0-dev.58
       '@prisma/client':
         specifier: 7.10.0-dev.58
-        version: 7.10.0-dev.58(prisma@7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2))(typescript@7.0.2)
+        version: 7.10.0-dev.58(typescript@7.0.2)
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -226,15 +226,15 @@ importers:
         specifier: ^8.23.0
         version: 8.23.0
     devDependencies:
+      '@prisma/prisma7':
+        specifier: 7.10.0-dev.58
+        version: 7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2)
       '@types/node':
         specifier: ^26.2.0
         version: 26.2.0
       '@types/pg':
         specifier: ^8.21.0
         version: 8.21.0
-      prisma:
-        specifier: 7.10.0-dev.58
-        version: 7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2)
       tsx:
         specifier: ^4.23.12
         version: 4.23.12
@@ -467,6 +467,11 @@ packages:
 
   '@prisma/get-platform@7.2.0':
     resolution: {integrity: sha512-k1V0l0Td1732EHpAfi2eySTezyllok9dXb6UQanajkJQzPUGi3vO2z7jdkz67SypFTdmbnyGYxvEvYZdZsMAVA==}
+
+  '@prisma/prisma7@7.10.0-dev.58':
+    resolution: {integrity: sha512-Wb9+SGWCDrMd5+fnuL9cpoLuKdbhAW94GBEojyMxKDPurl1RZ/5pmFiu9WANqcixujhinxH4R1o9u2QE1ERFHQ==}
+    engines: {node: ^20.19 || ^22.12 || >=24.0}
+    hasBin: true
 
   '@prisma/query-plan-executor@7.2.0':
     resolution: {integrity: sha512-EOZmNzcV8uJ0mae3DhTsiHgoNCuu1J9mULQpGCh62zN3PxPTd+qI9tJvk5jOst8WHKQNwJWR3b39t0XvfBB0WQ==}
@@ -1284,11 +1289,10 @@ snapshots:
 
   '@prisma/client-runtime-utils@7.10.0-dev.58': {}
 
-  '@prisma/client@7.10.0-dev.58(prisma@7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2))(typescript@7.0.2)':
+  '@prisma/client@7.10.0-dev.58(typescript@7.0.2)':
     dependencies:
       '@prisma/client-runtime-utils': 7.10.0-dev.58
     optionalDependencies:
-      prisma: 7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2)
       typescript: 7.0.2
 
   '@prisma/config@7.10.0-dev.58':
@@ -1350,6 +1354,18 @@ snapshots:
   '@prisma/get-platform@7.2.0':
     dependencies:
       '@prisma/debug': 7.2.0
+
+  '@prisma/prisma7@7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2)':
+    dependencies:
+      prisma: 7.10.0-dev.58(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - better-sqlite3
+      - magicast
+      - react
+      - react-dom
+      - typescript
 
   '@prisma/query-plan-executor@7.2.0': {}
 
