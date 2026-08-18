@@ -62,3 +62,9 @@ Concretely, this step:
 Prisma 8 is now installed as exact `prisma@8.0.0-rc.5` and `@prisma/orm-postgres@8.0.0-rc.3`. Its configuration and inferred database contract are separate from the Prisma 7 schema and config, and its emitted contract artifacts and PostgreSQL ORM runtime are kept separate from the generated Prisma 7 client and runtime.
 
 The Users routes now use the Prisma 8 PostgreSQL ORM while the Posts routes continue to use Prisma 7. Both runtimes share the existing database schema and preserve the API's relations, but Prisma 7 remains the sole owner of migrations.
+
+## Final step: Transfer migration ownership to Prisma 8
+
+Prisma 8 now owns migration planning and application. Its baseline migration captures the existing User and Post schema that Prisma 7 had already created. The existing database is adopted by signature-marking it at that baseline rather than replaying the baseline's schema creation.
+
+Future migrations use the Prisma 8 migration scripts. Prisma 7 remains only for the Posts runtime and Prisma 7 client generation; its earlier migration files are retained as journey history but no longer drive migrations.
