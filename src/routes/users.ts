@@ -1,5 +1,6 @@
 import { Hono } from "hono";
-import type { PrismaClient } from "../../generated/prisma/client.js";
+import type { FieldOutputTypes } from "../../generated/prisma8/contract.js";
+import type { Prisma8Orm } from "../db.js";
 import { ApiError } from "../errors.js";
 import {
   assertOnlyKeys,
@@ -10,14 +11,21 @@ import {
   requireEmail,
 } from "../validation.js";
 
-export function usersRoutes(prisma: PrismaClient): Hono {
+type UserTimestamp = FieldOutputTypes["public"]["User"]["updatedAt"];
+
+function currentTimestamp(): UserTimestamp {
+  return new Date().toISOString() as UserTimestamp;
+}
+
+export function usersRoutes(orm: Prisma8Orm): Hono {
   const users = new Hono();
 
   users.get("/", async (c) => {
-    const result = await prisma.user.findMany({
-      include: { posts: { orderBy: { id: "asc" } } },
-      orderBy: { id: "asc" },
-    });
+    const result = await orm.public.User.include("posts", (posts) =>
+      posts.orderBy((post) => post.id.asc()),
+    )
+      .orderBy((user) => user.id.asc())
+      .all();
     return c.json(result);
   });
 
@@ -27,19 +35,19 @@ export function usersRoutes(prisma: PrismaClient): Hono {
     const email = requireEmail(body.email);
     const name = optionalNullableString(body.name, "name");
 
-    const user = await prisma.user.create({
-      data: { email, ...(name !== undefined ? { name } : {}) },
-      include: { posts: true },
+    const user = await orm.public.User.include("posts").create({
+      email,
+      updatedAt: currentTimestamp(),
+      ...(name !== undefined ? { name } : {}),
     });
     return c.json(user);
   });
 
   users.get("/:id", async (c) => {
     const id = parseId(c.req.param("id"));
-    const user = await prisma.user.findUnique({
-      where: { id },
-      include: { posts: { orderBy: { id: "asc" } } },
-    });
+    const user = await orm.public.User.include("posts", (posts) =>
+      posts.orderBy((post) => post.id.asc()),
+    ).first({ id });
     if (!user) {
       throw new ApiError(404, "User not found");
     }
@@ -52,30 +60,29 @@ export function usersRoutes(prisma: PrismaClient): Hono {
     assertOnlyKeys(body, ["email", "name"]);
     assertPatchHasFields(body);
 
-    const existing = await prisma.user.findUnique({ where: { id }, select: { id: true } });
-    if (!existing) {
-      throw new ApiError(404, "User not found");
-    }
-
-    const data: { email?: string; name?: string | null } = {};
+    const data: { email?: string; name?: string | null; updatedAt: UserTimestamp } = {
+      updatedAt: currentTimestamp(),
+    };
     if (Object.hasOwn(body, "email")) data.email = requireEmail(body.email);
     if (Object.hasOwn(body, "name")) data.name = optionalNullableString(body.name, "name") ?? null;
 
-    const user = await prisma.user.update({
-      where: { id },
-      data,
-      include: { posts: { orderBy: { id: "asc" } } },
-    });
+    const user = await orm.public.User.include("posts", (posts) =>
+      posts.orderBy((post) => post.id.asc()),
+    )
+      .where({ id })
+      .update(data);
+    if (!user) {
+      throw new ApiError(404, "User not found");
+    }
     return c.json(user);
   });
 
   users.delete("/:id", async (c) => {
     const id = parseId(c.req.param("id"));
-    const existing = await prisma.user.findUnique({ where: { id }, select: { id: true } });
-    if (!existing) {
+    const deleted = await orm.public.User.where({ id }).delete();
+    if (!deleted) {
       throw new ApiError(404, "User not found");
     }
-    await prisma.user.delete({ where: { id } });
     return c.json({ success: true });
   });
 

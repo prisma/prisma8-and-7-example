@@ -4,7 +4,7 @@ This repository will demonstrate how to run Prisma 7 and Prisma 8 side by side. 
 
 ## Initial state
 
-The repository currently contains a single REST API running only Prisma 7. Prisma 8 has not been added yet.
+The repository began with a single REST API running only Prisma 7. Prisma 8 had not been added yet.
 
 ### Stack
 
@@ -56,3 +56,9 @@ Concretely, this step:
 - changes the generate and migration scripts to call `prisma7`
 - renames `prisma.config.ts` to `prisma7.config.ts`
 - changes the config import to `@prisma/prisma7/config`
+
+## Step 2: Add Prisma 8 side by side
+
+Prisma 8 is now installed as exact `prisma@8.0.0-rc.5` and `@prisma/orm-postgres@8.0.0-rc.3`. Its configuration and inferred database contract are separate from the Prisma 7 schema and config, and its emitted contract artifacts and PostgreSQL ORM runtime are kept separate from the generated Prisma 7 client and runtime.
+
+The Users routes now use the Prisma 8 PostgreSQL ORM while the Posts routes continue to use Prisma 7. Both runtimes share the existing database schema and preserve the API's relations, but Prisma 7 remains the sole owner of migrations.

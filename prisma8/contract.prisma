@@ -1,0 +1,27 @@
+// Prisma 8 contract inferred from the live PostgreSQL schema.
+
+model User {
+  id        Int          @id(map: "User_pkey") @default(autoincrement())
+  email     String
+  name      String?
+  createdAt Timestamp(3) @default(now())
+  updatedAt Timestamp(3)
+  posts     Post[]
+
+  @@index([email], map: "User_email_key", unique: true)
+  @@map("User")
+}
+
+model Post {
+  id        Int          @id(map: "Post_pkey") @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean      @default(false)
+  authorId  Int
+  createdAt Timestamp(3) @default(now())
+  updatedAt Timestamp(3)
+  author    User         @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Post_authorId_fkey")
+
+  @@index([authorId], map: "Post_authorId_idx")
+  @@map("Post")
+}

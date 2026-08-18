@@ -5,7 +5,9 @@ allowBuilds:
   "@prisma/engines": true
   "@prisma/prisma7": true
   esbuild: true
+  msgpackr-extract: false
   prisma: true
+  workerd: true
 
 minimumReleaseAgeExclude:
   - '@prisma/adapter-pg@7.10.0-dev.58'
@@ -18,4 +20,12 @@ minimumReleaseAgeExclude:
   - '@prisma/fetch-engine@7.10.0-dev.58'
   - '@prisma/get-platform@7.10.0-dev.58'
   - '@prisma/prisma7@7.10.0-dev.58'
-  - prisma@7.10.0-dev.58
+  - prisma@7.10.0-dev.58 || 8.0.0-rc.5
+  - '@prisma/cli-engine@0.2.0'
+  - '@prisma/orm-family-sql@8.0.0-rc.3'
+  - '@prisma/orm-framework@8.0.0-rc.3'
+  - '@prisma/orm-postgres@8.0.0-rc.3'
+  - '@prisma/orm-target-postgres@8.0.0-rc.3'
+  - '@prisma/orm-toolchain@8.0.0-rc.3'
+  - '@prisma/composer-cli@0.8.0'
+  - '@prisma/composer@0.8.0'

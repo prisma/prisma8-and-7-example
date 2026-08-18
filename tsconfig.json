@@ -9,9 +9,10 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "noUncheckedIndexedAccess": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "generated/prisma/**/*.ts"],
+  "include": ["src/**/*.ts", "generated/prisma/**/*.ts", "generated/prisma8/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

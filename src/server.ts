@@ -1,14 +1,14 @@
 import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { createApp } from "./app.js";
-import { closeDatabase, prisma } from "./db.js";
+import { closeDatabases, prisma7, prisma8 } from "./db.js";
 
 const configuredPort = Number(process.env.PORT ?? 3000);
 if (!Number.isInteger(configuredPort) || configuredPort < 1 || configuredPort > 65535) {
   throw new Error("PORT must be an integer between 1 and 65535");
 }
 
-const app = createApp(prisma);
+const app = createApp(prisma7, prisma8.orm);
 const server = serve({ fetch: app.fetch, port: configuredPort }, (info) => {
   console.log(`API listening on http://localhost:${info.port}`);
 });
@@ -21,7 +21,7 @@ async function shutdown(signal: string): Promise<void> {
 
   server.close(async (serverError) => {
     try {
-      await closeDatabase();
+      await closeDatabases();
     } catch (databaseError) {
       console.error("Failed to close the database cleanly", databaseError);
       process.exitCode = 1;

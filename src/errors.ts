@@ -10,7 +10,24 @@ export class ApiError extends Error {
   }
 }
 
+function isPrisma8UniqueEmailError(error: unknown): boolean {
+  if (typeof error !== "object" || error === null) {
+    return false;
+  }
+
+  const candidate = error as Record<string, unknown>;
+  return (
+    candidate.name === "SqlQueryError" &&
+    candidate.sqlState === "23505" &&
+    candidate.constraint === "User_email_key"
+  );
+}
+
 export function mapPrismaError(error: unknown): ApiError | undefined {
+  if (isPrisma8UniqueEmailError(error)) {
+    return new ApiError(409, "A user with that email already exists");
+  }
+
   if (!(error instanceof Prisma.PrismaClientKnownRequestError)) {
     return undefined;
   }
