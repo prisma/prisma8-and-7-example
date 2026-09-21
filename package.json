@@ -10,10 +10,12 @@
     "typecheck": "tsc --noEmit",
     "start": "node dist/src/server.js",
     "prisma7:generate": "prisma7 generate --config prisma7.config.ts",
-    "prisma7:migrate:dev": "prisma7 migrate dev --config prisma7.config.ts",
-    "prisma7:migrate:deploy": "prisma7 migrate deploy --config prisma7.config.ts",
     "prisma8:contract:infer": "prisma contract infer --config prisma.config.ts --output prisma8/contract.prisma",
-    "prisma8:contract:emit": "prisma contract emit --config prisma.config.ts"
+    "prisma8:contract:emit": "prisma contract emit --config prisma.config.ts",
+    "prisma8:migration:plan": "prisma migration plan --config prisma.config.ts",
+    "prisma8:migration:check": "prisma migration check --config prisma.config.ts",
+    "prisma8:migration:status": "prisma migration status --config prisma.config.ts",
+    "prisma8:migrate": "prisma db migrate --config prisma.config.ts --advance-ref db"
   },
   "keywords": [
     "hono",
@@ -29,17 +31,17 @@
     "@hono/node-server": "^2.1.1",
     "@prisma/adapter-pg": "7.10.0-dev.58",
     "@prisma/client": "7.10.0-dev.58",
-    "@prisma/orm-postgres": "8.0.0-rc.3",
+    "@prisma/orm-postgres": "8.0.0-rc.11",
     "dotenv": "^17.4.2",
     "hono": "^4.13.2",
     "pg": "^8.23.0"
   },
   "devDependencies": {
-    "@prisma/cli-engine": "0.2.0",
+    "@prisma/cli-engine": "0.3.0",
     "@prisma/prisma7": "7.10.0-dev.58",
     "@types/node": "^26.2.0",
     "@types/pg": "^8.21.0",
-    "prisma": "8.0.0-rc.5",
+    "prisma": "8.0.0-rc.15",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   }
