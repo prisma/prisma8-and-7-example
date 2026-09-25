@@ -17,6 +17,8 @@ The repository began with a single REST API running only Prisma 7. Prisma 8 had 
 
 Prisma uses the `prisma-client` generator and writes the generated client to `generated/prisma`. The application connects through Prisma's PostgreSQL driver adapter backed by `pg`.
 
+The project compiles with `tsc` and runs the output with `node`, so `tsconfig.json` uses `"module": "NodeNext"` and every relative import ends in `.js`; a project run through `tsx` or a bundler can use `"module": "preserve"` with `"moduleResolution": "bundler"` instead and skip the extensions.
+
 ### Data model
 
 The starting schema has two related models:
