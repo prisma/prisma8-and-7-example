@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import type { PrismaClient } from "../../generated/prisma/client.js";
-import { ApiError } from "../errors.js";
+import type { PrismaClient } from "../../generated/prisma/client";
+import { ApiError } from "../errors";
 import {
   assertOnlyKeys,
   assertPatchHasFields,
@@ -8,7 +8,7 @@ import {
   parseId,
   readJsonObject,
   requireEmail,
-} from "../validation.js";
+} from "../validation";
 
 export function usersRoutes(prisma: PrismaClient): Hono {
   const users = new Hono();
