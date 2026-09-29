@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import type { PrismaClient } from "../../generated/prisma/client.js";
-import { ApiError } from "../errors.js";
+import type { PrismaClient } from "../../generated/prisma/client";
+import { ApiError } from "../errors";
 import {
   assertOnlyKeys,
   assertPatchHasFields,
@@ -10,7 +10,7 @@ import {
   readJsonObject,
   requireNonEmptyString,
   requirePositiveInteger,
-} from "../validation.js";
+} from "../validation";
 
 export function postsRoutes(prisma: PrismaClient): Hono {
   const posts = new Hono();

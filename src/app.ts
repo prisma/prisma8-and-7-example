@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import type { PrismaClient } from "../generated/prisma/client.js";
-import type { Prisma8Orm } from "./db.js";
-import { ApiError, mapPrismaError } from "./errors.js";
-import { postsRoutes } from "./routes/posts.js";
-import { usersRoutes } from "./routes/users.js";
+import type { PrismaClient } from "../generated/prisma/client";
+import type { Prisma8Orm } from "./db";
+import { ApiError, mapPrismaError } from "./errors";
+import { postsRoutes } from "./routes/posts";
+import { usersRoutes } from "./routes/users";
 
 export function createApp(prisma7: PrismaClient, prisma8Orm: Prisma8Orm): Hono {
   const app = new Hono();
