@@ -1,5 +1,5 @@
 import type { Context } from "hono";
-import { ApiError } from "./errors.js";
+import { ApiError } from "./errors";
 
 type JsonObject = Record<string, unknown>;
 

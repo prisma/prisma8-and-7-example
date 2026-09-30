@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import type { FieldOutputTypes } from "../../generated/prisma8/contract.js";
-import type { Prisma8Orm } from "../db.js";
-import { ApiError } from "../errors.js";
+import type { FieldOutputTypes } from "../../generated/prisma8/contract.d";
+import type { Prisma8Orm } from "../db";
+import { ApiError } from "../errors";
 import {
   assertOnlyKeys,
   assertPatchHasFields,
@@ -9,7 +9,7 @@ import {
   parseId,
   readJsonObject,
   requireEmail,
-} from "../validation.js";
+} from "../validation";
 
 type UserTimestamp = FieldOutputTypes["public"]["User"]["updatedAt"];
 

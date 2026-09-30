@@ -2,9 +2,9 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import postgres from "@prisma/orm-postgres/runtime";
 import { Pool } from "pg";
-import type { Contract } from "../generated/prisma8/contract.js";
+import type { Contract } from "../generated/prisma8/contract.d";
 import contractJson from "../generated/prisma8/contract.json" with { type: "json" };
-import { PrismaClient } from "../generated/prisma/client.js";
+import { PrismaClient } from "../generated/prisma/client";
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) {

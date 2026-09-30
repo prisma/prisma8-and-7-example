@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { serve } from "@hono/node-server";
-import { createApp } from "./app.js";
-import { closeDatabases, prisma7, prisma8 } from "./db.js";
+import { createApp } from "./app";
+import { closeDatabases, prisma7, prisma8 } from "./db";
 
 const configuredPort = Number(process.env.PORT ?? 3000);
 if (!Number.isInteger(configuredPort) || configuredPort < 1 || configuredPort > 65535) {
